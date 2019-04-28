@@ -97,4 +97,4 @@ search:
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: https://github.com/wsWangjinxu/wsWangjinxu.github.io.git
+  repo: https://github.com/wsWangjinxu/blog.git
