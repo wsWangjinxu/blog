@@ -12,7 +12,7 @@ gitment:
 gitalk:
   enable: true ## If you want to use Gitment comment system please set the value to true.
   owner: wsWangjinxu ## Your GitHub ID, e.g. username
-  repo: wswangjinxu.github.io ## The repository to store your comments, make sure you're the repo's owner, e.g. gitalk.github.io
+  repo: https://github.com/wsWangjinxu/blog.git ## The repository to store your comments, make sure you're the repo's owner, e.g. gitalk.github.io
   client_id: a5aac15879e4c0d33259 ## GitHub client ID, e.g. 75752dafe7907a897619
   client_secret: be3e781c230382a51e538833bc78f7396209c97a ## GitHub client secret, e.g. ec2fb9054972c891289640354993b662f4cccc50
   admin: wsWangjinxu ## Github repo owner and collaborators, only these guys can initialize github issues.
