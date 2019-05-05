@@ -2,7 +2,7 @@
 title: GOPATH 和工作区
 date: 2019-04-21 10:27:51
 category: Go
-tags: GOPATH
+tags: Go语言学习笔记
 ---
 
 ## 环境变量
