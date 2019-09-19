@@ -194,7 +194,7 @@ tags: RESTful
 + **客户端和服务器之间，传递这种资源的某种表现层**
 + **客户端通过四个HTTP动词，对服务器资源进行操作，实现“表现层状态转移”**。
 
-### 2.5 参考链接
+### 2.5 参考内容
 
 + [RESTful API 最佳实践](http://www.ruanyifeng.com/blog/2018/10/restful-api-best-practices.html)
 + [理解RESTful架构](http://www.ruanyifeng.com/blog/2011/09/restful.html)
