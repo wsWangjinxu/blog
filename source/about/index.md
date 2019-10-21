@@ -2,7 +2,7 @@
 comments: false
 ---
 
-<img align="left" src="https://bucket-blog-img.oss-cn-hangzhou.aliyuncs.com/profilephoto.jpeg?Expires=1571625926&OSSAccessKeyId=TMP.hcNxkVisVBy91rsYFD8G45Dt1t9K6z2PqXnhRfaDfZypfx5mtNJfbrKfBGt2UJNYVfkXGHk2JhDtc9aanvvJYggTVLdr1ZJKT4dpAAAVc6yiZNSc1HG2BLYHRUXmpp.tmp&Signature=pCix2PNr1eyWY5DBAHUKyEgxM9o%3D" width="150"> 
+<img align="left" src="../assets/profilephoto.jpeg" width="150"> 
 <br>
 <br>
 <br>
