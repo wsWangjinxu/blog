@@ -1,0 +1,172 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta name="generator" content="Hexo 3.8.0"><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>RESTful架构详解 | 似水年华</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/normalize/8.0.1/normalize.min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/1.0.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/1.0.0/grids-responsive-min.css"><link rel="stylesheet" href="//lib.baomitu.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//lib.baomitu.com/jquery/3.3.1/jquery.min.js"></script><link rel="icon" mask sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">RESTful架构详解</h1><a id="logo" href="/.">似水年华</a><p class="description">山水之间，并无岁月；人之境遇，方有春秋</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">RESTful架构详解</h1><div class="post-meta">Jan 20, 2019<span> | </span><span class="category"><a href="/categories/API/">API</a></span></div><div class="post-content"><h2 id="1-什么是REST"><a href="#1-什么是REST" class="headerlink" title="1. 什么是REST"></a>1. 什么是REST</h2><p><strong><code>REST</code>全称是Representational State Transfer, 中文意思是表述性状态转移。指的是一组架构约束条件和原则。</strong>如果一个架构符合REST的约束条件和原则，我们就可以称它为<code>RESTful</code>架构。</p>
+<h2 id="2-理解RESTful"><a href="#2-理解RESTful" class="headerlink" title="2. 理解RESTful"></a>2. 理解RESTful</h2><p>结合<code>REST</code>原则，围绕资源展开讨论，从资源的<strong>定义、获取、表述、关联、状态变迁</strong>等角度，列举一些关键概念并加以解释。</p>
+<ul>
+<li>资源与URl</li>
+<li>统一资源接口</li>
+<li>资源的表述</li>
+<li>资源的链接</li>
+<li>状态的转移</li>
+</ul>
+<h3 id="2-1-资源与URl"><a href="#2-1-资源与URl" class="headerlink" title="2.1 资源与URl"></a>2.1 资源与URl</h3><p><code>REST</code>全称是表述性状态转移，那究竟指的是什么的表述？其实指的就是资源的。<strong>任何事物，只要有被引用到的必要，它就是一个资源。资源可以是实体（例如手机号码），也可以只是一个抽象概念（例如价值）</strong>。下面是一些资源的例子：</p>
+<ul>
+<li>某用户的手机号码</li>
+<li>某用户的个人信息</li>
+<li>最多用户订购的GPRS套餐</li>
+<li>两个产品之间的依赖关系</li>
+<li>某用户可以办理的优惠套餐</li>
+<li>某手机号码的潜在价值</li>
+</ul>
+<p>要让一个资源可以被识别，需要有个唯一的标识，再Web中这个唯一标识就是URl(Uniform Resource Identifier)。URl既可以看成是资源的地址，也可以看成是资源的名称。如果某些信息没有使用<code>URl</code>来表示，那它就不能算是一个资源，只能算是资源的一些信息而已。<code>URl</code>的设计应该遵循可寻址性原则，具有自描述性，需要在形式上给人以直觉上的关联。</p>
+<ul>
+<li><a href="https://github.com/git" target="_blank" rel="noopener">https://github.com/git</a></li>
+<li><a href="https://github.com/git/git" target="_blank" rel="noopener">https://github.com/git/git</a></li>
+<li><a href="https://github.com/git/git/blob/master/block-sha1/sha1.h" target="_blank" rel="noopener">https://github.com/git/git/blob/master/block-sha1/sha1.h</a></li>
+<li><a href="https://github.com/git/git/commit/e3af72cdafab5993d18fae056f87e1d675913d08" target="_blank" rel="noopener">https://github.com/git/git/commit/e3af72cdafab5993d18fae056f87e1d675913d08</a></li>
+<li><a href="https://github.com/git/git/pulls" target="_blank" rel="noopener">https://github.com/git/git/pulls</a></li>
+<li><a href="https://github.com/git/git/pulls?state=closed" target="_blank" rel="noopener">https://github.com/git/git/pulls?state=closed</a></li>
+<li><a href="https://github.com/git/git/compare/master…next" target="_blank" rel="noopener">https://github.com/git/git/compare/master…next</a></li>
+</ul>
+<p><code>URl</code>设计上的一些技巧：</p>
+<ul>
+<li>使用<code>_</code>或<code>-</code>来让<code>URl</code>可读性更好</li>
+<li>使用<code>/</code>来表示资源的层级关系</li>
+<li>使用<code>?</code>用来过滤资源</li>
+<li>使用<code>,</code>或<code>;</code>可以用来表示同级资源的关系</li>
+</ul>
+<h4 id="统一资源接口"><a href="#统一资源接口" class="headerlink" title="统一资源接口"></a>统一资源接口</h4><p><strong><code>RESTful</code>架构应该遵循统一接口原则，统一接口包含了一组受限的预定义操作，不论什么样的资源，都是通过使用相同的接口进行资源的访问。</strong>接口应该使用标准的<code>HTTP</code>方法如，<code>GET</code>，<code>PUT</code>和<code>POST</code>，并遵循这些方法的语义。</p>
+<p>如果按照<code>HTTP</code>方法的语义来暴露资源，那么接口将会拥有安全性和幂等性（简单来说一个操作多次执行与一次执行产生的结果一致）的特性，例如<code>GET</code>和<code>HEAD</code>请求都是安全的，无论请求多少次，都不会改变服务器状态。而<code>GET</code>、<code>HEAD</code>、<code>PUT</code>和<code>DELETE</code>请求都是幂等的，无论对资源操作多少次，结果总是一样的，后面的请求并不会产生比第一次更多的影响。</p>
+<p>下面列出了<code>GET</code>，<code>DELETE</code>，<code>POST</code>和<code>PUT</code>的经典用法：</p>
+<h5 id="GET"><a href="#GET" class="headerlink" title="GET"></a>GET</h5><ul>
+<li>安全且幂等</li>
+<li>获取表示</li>
+<li>变更时获取表示（缓存）</li>
+<li>200（OK）- 表示已经在响应中发出</li>
+<li>204（无内容）- 资源有空表示</li>
+<li>301（Moved Permanently）- 资源的URl已被更新</li>
+<li>303（See Other）- 其他（如，负载均衡）</li>
+<li>304（not modified）- 资源未更改（缓存）</li>
+<li>400（bad request）- 指代坏请求（如，参数错误）</li>
+<li>404（not found）- 资源不存在</li>
+<li>406（not acceptable）- 服务端不支持所需表示</li>
+<li>500（internal server error）- 通用错误响应</li>
+<li>503（Service Unavailable）- 服务端当前无法处理请求</li>
+</ul>
+<h5 id="POST"><a href="#POST" class="headerlink" title="POST"></a>POST</h5><ul>
+<li>不安全且不幂等</li>
+<li>使用服务端管理的（自动产生）的实例号创建资源</li>
+<li>创建子资源</li>
+<li>部分更新资源</li>
+<li>如果没有被修改，则不更新资源（乐观锁）</li>
+<li>200（OK）- 如果现有资源已被更改</li>
+<li>201（created）- 如果新资源被创建</li>
+<li>202（accepted）- 已经接受处理请求但尚未完成（异步处理）</li>
+<li>301（Moved Permanently）- 资源的URl被更新</li>
+<li>303（See Other）- 其他（如，负载均衡）</li>
+<li>400（bad request）- 指代坏请求</li>
+<li>404（not found）- 资源不存在</li>
+<li>406（not acceptable）- 服务端不支持所需表示</li>
+<li>409（conflict）- 通用冲突</li>
+<li>412（Precondition Failed）- 前置条件失败（如执行条件更新时的冲突）</li>
+<li>415（unsupported media type）- 接受到的表示不受支持</li>
+<li>500（internal server error）- 通用错误响应</li>
+<li>503（Service Unavailable）- 服务当前无法处理请求</li>
+</ul>
+<h5 id="PUT"><a href="#PUT" class="headerlink" title="PUT"></a>PUT</h5><ul>
+<li>不安全但幂等</li>
+<li>用客户端管理的实例号创建一个资源</li>
+<li>通过替换的方式更新资源</li>
+<li>如果未被修改，则更新资源（乐观锁）</li>
+<li>200（OK）- 如果已存在资源被更改</li>
+<li>201（created）- 如果新资源被创建</li>
+<li>301（Moved Permanently）- 资源的URl已更改</li>
+<li>303（See Other）- 其他（如，负载均衡）</li>
+<li>400（bad request）- 指代坏请求</li>
+<li>404（not found）- 资源不存在</li>
+<li>406（not acceptable）- 服务端不支持所需表示</li>
+<li>409（conflict）- 通用冲突</li>
+<li>412（Precondition Failed）- 前置条件失败（如执行条件更新时的冲突）</li>
+<li>415（unsupported media type）- 接受到的表示不受支持</li>
+<li>500（internal server error）- 通用响应错误</li>
+<li>503（Service Unavaliable）- 服务当前无法处理请求</li>
+</ul>
+<h5 id="DELETE"><a href="#DELETE" class="headerlink" title="DELETE"></a>DELETE</h5><ul>
+<li>不安全但幂等</li>
+<li>删除资源</li>
+<li>200（OK）- 资源已被删除</li>
+<li>301（Moved Permanently）- 资源的URl已更改</li>
+<li>303（See Other）- 其他，如负载均衡</li>
+<li>400（bad request）- 指代坏情去</li>
+<li>404（not found）- 资源不存在</li>
+<li>409（conflict）- 通用冲突</li>
+<li>500（internal server error）- 通用响应错误</li>
+<li>503（Service Unavaliable）- 服务器当前无法处理请求</li>
+</ul>
+<p>下面我们来看一些实践中常见的问题：</p>
+<ul>
+<li><p><code>POST</code>和<code>PUT</code>用于创建资源时有什么区别？<br><code>POST</code>和<code>PUT</code>在创建资源的区别在于，所创建的资源的名称（URl）是否由客户端决定。例如为我的博文增加一个java的分类，生成的路径就是分类名<code>/categories/java</code>，那么就可以采用<code>PUT</code>方法。不过很多人直接把<code>POST</code>、<code>GET</code>、<code>PUT</code>、<code>DELETE</code>直接对应上<code>CRUD</code>，例如在一个典型的<code>rails</code>实现的<code>RESTful</code>应用中就是这么做的。</p>
+</li>
+<li><p>客户端不一定都支持这些<code>HTTP</code>方法吧？<br>的确有这种情况，特别是一些比较古老的基于浏览器的客户端，只能支持<code>GET</code>和<code>POST</code>两种方法。在实践上，客户端和服务端都可能需要做一些妥协。</p>
+</li>
+<li><p>统一接口是否意味着不能扩展带特殊语义的方法？<br>统一接口不阻止你扩展方法，只要方法对资源的操作有着具体的、可识别的语义即可，并能够保持整个接口的统一性。</p>
+</li>
+<li><p>统一资源接口对URl有什么指导意义？<br>统一资源接口要求使用标准的<code>HTTP</code>方法对资源进行操作，所以<code>URl</code>只应该来表示资源的名称，而不应该包括资源的操作。通俗来说，<code>URl</code>不应该使用动作来描述。例如，下面是一些不符合接口要求的<code>URl</code>：</p>
+<ul>
+<li>GET/getUser/1</li>
+<li>POST/createUser</li>
+<li>PUT/updateUser/1</li>
+<li>DELETE/deleteUser/1</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>如果<code>GET</code>请求增加计数器，这是违反安全性？<br>安全性不代表请求不产生副作用，例如像很多API开发平台，都对请求流量做限制。但客户端不是为了追求副作用而发出这些<code>GET</code>或<code>HEAD</code>请求的，产生副作用是服务端自做主张的。另外，服务端在设计时，也不应该让副作用太大，因为客户端认为这些请求是不会产生副作用的。</p>
+</li>
+<li><p>直接忽视缓存可取吗？<br>即使你按各个动词的原本意图来使用它们，你仍可以轻易禁止缓存机制。最简单的做法就是在你的<code>HTTP</code>响应里增加这样一个报头：<code>Cache-control:no-cache</code>。但是，同时，你也对失去了高效的缓存与再验证的支持（使用Etag等机制）。对于客户端来说，在为一个<code>REST</code>式服务实现程序客户端时，也应该充分利用现有的缓存机制，以免每次都重新获取表示。</p>
+</li>
+<li><p>响应代码的处理有必要吗？<br>HTTP的响应代码可用于应付不同场合，正确使用这些状态码意味着客户端与服务器可以在一个具备较丰富语义的层次上进行沟通。例如：201（”Created”）响应代码表明已经创建了一个新的资源，其URl在Location响应报头里。<br>假如你不利用HTTP状态代码丰富的应用语义，那么你将错失提高重用性、增强互操作性和提升松耦合性的机会。</p>
+</li>
+</ul>
+<h3 id="2-3-资源的表述"><a href="#2-3-资源的表述" class="headerlink" title="2.3 资源的表述"></a>2.3 资源的表述</h3><p><strong>客户端获取的只是资源的表述而已。资源在外界的具体呈现，可以有多种表述（或称为表现、表示）形式，在客户端和服务端之间传送的也是资源的表述，而不是资源本身。</strong>例如文本资源可以采用html、xml、json等格式，图片可以使用png、或JPG展现出来。</p>
+<p>资源的表述包括数据和描述数据的元数据，例如HTTP头<code>Content-Type</code>就时这样一个元数据属性。</p>
+<p>那么客户端如何知道服务端提供那种表述形式哪？</p>
+<p>答案时可以通过HTTP内容协商，客户端可以通过<code>Accept</code>头请求一种特定格式的表述，服务端则通过<code>Content-Type</code>告诉客户端资源的表述形式。</p>
+<p>下面来看一些实践上的常见设计：</p>
+<ul>
+<li><p>在URL里面带上版本号，例如：<br><a href="http://api.example.com/1.0/foo" target="_blank" rel="noopener">http://api.example.com/1.0/foo</a><br><a href="http://api.example.com/1.2/foo" target="_blank" rel="noopener">http://api.example.com/1.2/foo</a><br><strong>因为不同的版本可以理解成同一种资源的不同表现形式，所以应该采用同一个<code>URl</code>。</strong>版本号可以在HTTP请求头信息的<code>Accept</code>字段中进行区分。<br>Accept: vnd.example-com.foo+json; version=1.0<br>Accept: vnd.example-com.foo+json; version=1.1<br>Accept: vnd.example-com.foo+json; version=2.0</p>
+</li>
+<li><p>使用<code>URl</code>后缀来区分表述格式<br>像rails框架，就支持使用/users.xml或/users.json来区分不同的格式。 这样的方式对于客户端来说，无疑是更为直观，但<strong>混淆了资源的名称和资源的表述形式</strong>。还是应该优先使用内容协商来区分表述格式。</p>
+</li>
+<li><p>如何处理不支持的表述格式<br>当服务器不支持所请求的表述格式，它应该返回一个HTTP 406响应，表示拒绝处理该请求。</p>
+</li>
+</ul>
+<h3 id="2-4-状态的转移"><a href="#2-4-状态的转移" class="headerlink" title="2.4 状态的转移"></a>2.4 状态的转移</h3><p>访问一个网站，就代表了客户端和服务器的一个互动过程。在这个过程中，势必涉及到数据和状态的变化。</p>
+<p>互联网通信协议HTTP协议，是一个无状态协议。这意味着，所有的状态都保存在服务器端。因此，<strong>如果客户端想要操作服务器，必须通过某种手段，让服务器端发生”状态转化”（State Transfer）。而这种转化是建立在表现层之上的，所以就是”表现层状态转化”</strong>。</p>
+<p>客户端用到的手段，只能是HTTP协议。具体来说，就是HTTP协议里面，四个表示操作方式的动词：GET、POST、PUT、DELETE。它们分别对应四种基本操作：<strong>GET用来获取资源，POST用来新建资源（也可以用于更新资源），PUT用来更新资源，DELETE用来删除资源</strong>。</p>
+<p>综合上面的内容，总结一下什么是<strong>RESTful</strong>架构：</p>
+<ul>
+<li><strong>每一个<code>URl</code>代表一种资源</strong></li>
+<li><strong>客户端和服务器之间，传递这种资源的某种表现层</strong></li>
+<li><strong>客户端通过四个HTTP动词，对服务器资源进行操作，实现“表现层状态转移”</strong>。</li>
+</ul>
+<h3 id="2-5-参考内容"><a href="#2-5-参考内容" class="headerlink" title="2.5 参考内容"></a>2.5 参考内容</h3><ul>
+<li><a href="http://www.ruanyifeng.com/blog/2018/10/restful-api-best-practices.html" target="_blank" rel="noopener">RESTful API 最佳实践</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2011/09/restful.html" target="_blank" rel="noopener">理解RESTful架构</a></li>
+<li><a href="https://www.runoob.com/w3cnote/restful-architecture.html" target="_blank" rel="noopener">RESTful架构详解</a></li>
+</ul>
+</div><div class="tags"><a href="/tags/RESTful/">RESTful</a></div><div class="post-nav"><a class="pre" href="/2019/03/31/CSS实现文本单行居中多行靠左/">CSS 实现文本单行居中，多行靠左</a><a class="next" href="/2018/12/19/关于防止浏览器记住密码的一些探索/">关于浏览器记住密码的一些探索</a></div><div id="container"></div><link rel="stylesheet" type="text/css" href="//unpkg.com/gitalk/dist/gitalk.css?v=0.0.0"><script type="text/javascript" src="//cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js?v=0.0.0"></script><script type="text/javascript" src="//unpkg.com/gitalk/dist/gitalk.min.js?v=0.0.0"></script><script>var gitalk = new Gitalk({
+  clientID: '842d8ecfa6d0e5202966',
+  clientSecret: '95bd57bae7fb2f91b3be577a9536c051df24a5e8',
+  repo: 'blog',
+  owner: 'wsWangjinxu',
+  admin: ['wsWangjinxu'],
+  id: md5(location.pathname),
+  distractionFreeMode: false
+})
+gitalk.render('container')
+</script></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><div class="search-form"><input id="local-search-input" placeholder="Search" type="text" name="q" results="0"><div id="local-search-result"></div></div></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/API/">API</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/CSS/">CSS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Go/">Go</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/浏览器/">浏览器</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/node/" style="font-size: 15px;">node</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/前端路由/" style="font-size: 15px;">前端路由</a> <a href="/tags/Go语言学习笔记/" style="font-size: 15px;">Go语言学习笔记</a> <a href="/tags/二分查找/" style="font-size: 15px;">二分查找</a> <a href="/tags/闭包/" style="font-size: 15px;">闭包</a> <a href="/tags/webAPI/" style="font-size: 15px;">webAPI</a> <a href="/tags/JavaScript/" style="font-size: 15px;">JavaScript</a> <a href="/tags/类型/" style="font-size: 15px;">类型</a> <a href="/tags/RESTful/" style="font-size: 15px;">RESTful</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/04/11/【leetcode刷题笔记】1.二分查找的变种/">【leetcode刷题笔记】1.二分查找的变种</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/10/JS手写代码系列/">JS手写代码系列</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/07/Gitflow学习笔记/">Gitflow学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/04/使用PM2管理你的node应用程序/">使用 PM2 管理你的 node 应用程序</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/20/常用页面尺寸与位置的获取/">常用页面尺寸与位置的获取</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/07/闭包的概念与应用/">闭包的概念与应用</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/19/谈谈前端路由/">谈谈前端路由</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/05/Go命令源码文件/">Go 命令源码文件</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/27/JavaScript类型的细节/">JavaScript类型的细节</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/21/GOPATH和工作区/">GOPATH 和工作区</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="http://jackiecookie.github.io" title="jackiecookie" target="_blank">jackiecookie</a><ul></ul><a href="http://eightythousand.com/" title="手辰" target="_blank">手辰</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2020 <a href="/." rel="nofollow">似水年华.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//lib.baomitu.com/fancybox/3.5.2/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/fancybox/3.5.2/jquery.fancybox.min.css"><script type="text/javascript" src="/js/search.js?v=0.0.0"></script><script>var search_path = 'search.xml';
+if (search_path.length == 0) {
+   search_path = 'search.xml';
+}
+var path = '/' + search_path;
+searchFunc(path, 'local-search-input', 'local-search-result');
+</script><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>
